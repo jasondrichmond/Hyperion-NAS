@@ -1,0 +1,33 @@
+RAID
+
+hda - temporary hd
+hdb - raid disk 0
+hdc - raid disk 1
+
+install debian
+update kernel to 2.4.18
+install grub 'apt-get install grub raidtools2'
+run 'install-grub /dev/hda'
+run 'update-grub'
+run 'cfdisk /dev/hdb'
+configure hdb with three partitions
+	1. 750MB - linux partition
+	2. 50MB - swap
+	3. --MB - data partition
+
+configure /etc/raidtab
+	raiddev	/dev/md0
+		raidlevel		1
+		nr-raid-disks		2
+		nr-spare-disks		0
+		chunk-size		4
+		persistent-superblock	1
+		device			/dev/hdb1
+		raid-disk		0
+		device			/dev/hdc1
+		raid-disk		1
+
+run 'mkraid /dev/md0'
+check sync process with 'cat /proc/mdstat'
+
+16h, 63s, 232581c

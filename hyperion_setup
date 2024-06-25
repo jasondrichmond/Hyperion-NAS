@@ -1,0 +1,30 @@
+#!/bin/sh
+
+ln -s /mnt/themus/projects/hyperion/hyperion_final/config/ /hyperion_conf
+ln -s /mnt/themus/projects/hyperion/hyperion_final/website/ /hyperion_web
+cp /hyperion_conf/smartd.sh /usr/local/etc/rc.d/smartd.sh
+cp /hyperion_conf/hosts /etc/hosts
+cp /hyperion_conf/printcap /etc/printcap
+cp /hyperion_conf/rc.conf /etc/rc.conf
+cp /hyperion_conf/motd /etc/motd
+cp /hyperion_conf/loader.conf /boot/defaults/loader.conf
+cp /hyperion_conf/splash.bmp /boot/splash.bmp
+cp /hyperion_conf/httpd.conf /usr/local/etc/php.ini
+cp /hyperion_conf/php.ini /usr/local/etc/php.ini
+cp /hyperion_conf/smb.conf /usr/local/etc/smb.conf
+cp /hyperion_conf/sudoers /usr/local/etc/sudoers
+cp /hyperion_conf/smartd.conf /usr/local/etc/smartd.conf
+rm -R /usr/local/www/data-dist/*
+cp -R -L /hyperion_web/ /usr/local/www/data-dist/
+chmod -R 777 /usr/local/www/data-dist
+mkdir /var/spool/lpd/lp
+chmod 777 /var/spool/lpd/lp
+rm /hyperion_conf
+rm /hyperion_web
+mkdir /mnt-data/public
+chmod 777 /mnt-data/public
+mkdir /mnt-data/home
+chmod 777 /mnt-data/home
+mkdir /mnt-data/infected
+chmod 666 /mnt-data/infected
+chmod 444 /etc/resolv.conf
